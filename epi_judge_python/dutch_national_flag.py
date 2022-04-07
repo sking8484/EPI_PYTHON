@@ -1,4 +1,5 @@
 import functools
+from re import S
 from typing import List
 
 from test_framework import generic_test
@@ -9,7 +10,19 @@ RED, WHITE, BLUE = range(3)
 
 
 def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
-    # TODO - you fill in here.
+    pivotVal = A[pivot_index]
+
+    smaller, equal, larger = 0,0, len(A)-1
+
+    while equal <= larger:
+        if A[equal] < pivotVal:
+            A[smaller], A[equal] = A[equal],A[smaller]
+            smaller, equal = smaller +1, equal + 1
+        elif A[equal] == pivotVal:
+            equal = equal + 1
+        else:
+            A[equal], A[larger] = A[larger], A[equal]
+            larger = larger - 1
     return
 
 
