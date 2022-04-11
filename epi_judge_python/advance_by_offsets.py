@@ -4,8 +4,13 @@ from test_framework import generic_test
 
 
 def can_reach_end(A: List[int]) -> bool:
-    # TODO - you fill in here.
-    return True
+    furthestReachedSoFar, last = 0, len(A) - 1
+    i = 0
+
+    while i <= furthestReachedSoFar and furthestReachedSoFar < last:
+        furthestReachedSoFar = max(furthestReachedSoFar, A[i] + i)
+        i += 1
+    return furthestReachedSoFar >= last 
 
 
 if __name__ == '__main__':
