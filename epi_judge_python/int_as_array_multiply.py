@@ -6,18 +6,19 @@ from test_framework import generic_test
 def multiply(num1: List[int], num2: List[int]) -> List[int]:
 
     sign = -1 if (num1[0] < 0) ^ (num2[0] < 0) else 1
-
-    num1[0],num2[0] = abs(num1[0]), abs(num2[0])
-    returnArray = [0] * (len(num1) + len(num2))
-
-    for i in reversed(range(len(num1))):
-        for j in reversed(range(len(num2))):
-            returnArray[i + j + 1] += num1[i] * num2[j]
-            returnArray[i + j] += returnArray[i + j + 1] // 10
-            returnArray[i + j + 1] = returnArray[i + j + 1] % 10
+    returnNums = [0]*(len(num1)+len(num2))
+    num1[0], num2[0] = abs(num1[0]),abs(num2[0])
+    for n1 in reversed(range(len(num1))):
+        for n2 in reversed(range(len(num2))):
+            returnNums[n1+n2 + 1] += num1[n1]*num2[n2]
+            returnNums[n1+n2] += returnNums[n1+n2+1]//10
+            returnNums[n1+n2+1] %= 10
     
-    returnArray = returnArray[next((i for i, x in enumerate(returnArray) if x != 0), len(returnArray)):] or [0]
-    return [returnArray[0] * sign] + returnArray[1:]
+
+    returnNums = returnNums[next((i for i,x in enumerate(returnNums) if x != 0),len(returnNums)):] or [0]
+    returnNums = [sign*returnNums[0]] + returnNums[1:]
+
+    return returnNums
 
 
 

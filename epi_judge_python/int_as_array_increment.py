@@ -6,15 +6,15 @@ from test_framework import generic_test
 def plus_one(A: List[int]) -> List[int]:
     A[-1] += 1
 
-    for i in reversed(range(1, len(A))):
-        if A[i] < 10:
+    for num in reversed(range(1,len(A))):
+        if A[num] != 10:
             return A
-        A[i] -= 10
-        A[i - 1] += 1
-    if A[0] >= 10:
+        A[num - 1] += 1
+        A[num] = 0
+    if A[0] == 10:
         A[0] = 1
         A.append(0)
-    return A 
+    return A
 
     
 
